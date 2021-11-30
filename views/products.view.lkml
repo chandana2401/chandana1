@@ -25,8 +25,12 @@ view: products {
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+    link: {
+      label: "dimension drill link"
+      url: "/explore/chandana_pr1/order_items?fields=orders.created_date,orders.count,
+      products.category,products.department&f[orders.created_date]=2019&f[products.category]={{value|url_encode}}"
+    }
   }
-
   dimension: department {
     type: string
     sql: ${TABLE}.department ;;

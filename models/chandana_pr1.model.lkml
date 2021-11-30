@@ -3,7 +3,7 @@ connection: "the_look"
 
 # include all the views
 include: "/views/**/*.view"
-
+include: "/derived_test.view.lkml"
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
 
@@ -179,7 +179,7 @@ explore: ten_million_orders {
     relationship: many_to_one
   }
 }
-
+explore: derived_test {}
 explore: test {}
 
 explore: users {}

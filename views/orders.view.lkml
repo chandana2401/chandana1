@@ -37,6 +37,14 @@ view: orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+    link: {
+      label: "Drill Dashboard"
+      url: "/dashboards-next/137?Status={{value}}&Count={{orders.count._value|url_encode}}"
+    }
+    link: {
+      label: "Passing filters"
+      url: "/dashboards-next/137?Created Date={{ _filters['created_date'] | url_encode }}"
+    }
   }
 
   dimension: user_id {

@@ -39,28 +39,52 @@ view: derived_test {
   set: detail {
     fields: [users_gender, orders_created_date]
   }
+
   dimension: date_formatted {
 
     label: "Date_formatted"
 
     sql: ${orders_created_date} ;;
+    drill_fields: [detail*]
 
-    html:
+   html:
 
     {% if _user_attributes['gender_a'] == 'm' %}
 
-    {{ rendered_value | date: "%m/%d/%y" }}
+    {{linked_value}}
 
     {% endif %}
 
     {% if _user_attributes['gender_f'] == 'f' %}
 
-    {{ rendered_value | date: "%d/%m/%y" }}
+    {{linked_value}}
 
     {% endif %};;
-
+link: {
+  label: "testing"
+  url: "google.com"
+}
     }
 
-
+  #measure: average_of_fixed_fee{
+   # type: average
+    #sql: ${TABLE}.count ;;
+    #description: "Average of fixed fee, excluding credits"
+    #value_format: "#,##0"
+    #html:
+    #{% if _user_attributes['currency'] == 'GBP' %}
+    #£{{linked_value}}
+    #{% elsif _user_attributes['currency'] == 'AUD' %}
+    #${{linked_value}}
+    #{% elsif _user_attributes['currency'] == 'EUR' %}
+    #€{{linked_value}}
+    #{% elsif _user_attributes['currency'] == 'USD' %}
+    #${{linked_value}}
+    #{% else %}
+    #{{linked_value}}
+    #{% endif %}
+    #;;
+    #drill_fields: [detail*]
+  #}
 
 }

@@ -49,11 +49,38 @@ dimension: datefilter {
       url: "/dashboards-next/137?Created Date={{ _filters['created_date'] | url_encode }}"
     }
   }
-
+  dimension: status1 {
+    case: {
+      when: {
+        sql: ${TABLE}.status = "pending" ;;
+        label: "2019-01-01"
+      }
+      when: {
+        sql: ${TABLE}.status = 1 ;;
+        label: "complete"
+      }
+      when: {
+        sql: ${TABLE}.status = 0 ;;
+        label: "returned"
+      }
+      else: "unknown"
+    }
+  }
   dimension: user_id {
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
+  }
+  measure: test {
+    type: count_distinct
+    sql: ${id} ;;
+    drill_fields: [created_date,user_id]
+    link: {
+      label: "Drill as scatter plot"
+      url: "
+      {% assign vis_config = '{\"type\": \"looker_scatter\"}' %}
+      {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
+    }
   }
 
   measure: count {

@@ -35,14 +35,6 @@ view: products {
     type: string
     sql: ${TABLE}.department ;;
   }
-  dimension: transaction_adjusted {
-    label: "transaction_adjusted"
-    type: string
-    sql:CASE
-      WHEN ${TABLE}.department = "men" THEN ${TABLE}.id
-      ELSE "other"
-    END ;;
-  }
   dimension: item_name {
     type: string
     sql: ${TABLE}.item_name ;;

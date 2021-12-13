@@ -28,6 +28,7 @@ view: orders {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    html: {{rendered_value | date : "%y-%m-%d"}} ;;
   }
 dimension: datefilter {
   type: string
@@ -86,6 +87,15 @@ dimension: datefilter {
   measure: count {
     type: count
     drill_fields: [detail*]
+  }
+
+  measure: link {
+    type: number
+    link: {
+      label: "linked"
+       url: "/dashboards-next/191?Created Date={{ _filters['orders.created_date'] | url_encode }}"
+    }
+    sql: ${id} ;;
   }
 
   # ----- Sets of fields for drilling ------
